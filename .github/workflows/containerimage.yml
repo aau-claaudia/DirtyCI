@@ -22,4 +22,4 @@ jobs:
           file: ./app/Dockerfile
           push: true
           tags: |
-            ghcr.io/aau-claaudia/DirtyCI:latest
+            ghcr.io/aau-claaudia/dirtyci:latest
