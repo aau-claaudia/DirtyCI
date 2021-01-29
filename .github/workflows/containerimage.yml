@@ -2,12 +2,12 @@ name: containerimage
 
 on:
   push:
-    branches: master
+    branches: main
 
 jobs:
   app:
     runs-on: ubuntu-latest
-      steps:
+    steps:
       - uses: actions/checkout@master
       
       - name: run
