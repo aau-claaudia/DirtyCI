@@ -1,5 +1,5 @@
 FROM scratch
 
-COPY assets/main /main
+COPY app /app
 
-ENTRYPOINT ["/main"]
+ENTRYPOINT ["/app"]
