@@ -28,7 +28,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		atomic.AddUint64(&visitors, 1)
+		visitors += 1
 
 		w.Header().Add("X-Version", Version)
 		w.Header().Add("X-More-Header", "header")
