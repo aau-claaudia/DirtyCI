@@ -37,3 +37,13 @@ jobs:
           tags: |
             ghcr.io/aau-claaudia/dirtyci:latest
             ghcr.io/aau-claaudia/dirtyci:${{ env.GITHUB_SHA_SHORT }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: app
+    environment:
+      name: Production
+      url: http://130.226.98.55
+    steps:
+    - run: |
+        echo "Hello, we are going online!"
