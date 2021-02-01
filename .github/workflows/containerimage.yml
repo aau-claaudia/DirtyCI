@@ -26,7 +26,7 @@ jobs:
           PROJECT_PATH: "app/"
           CGO_ENABLED: "0" 
         with:
-          args: go build -ldflags "-X main.Version=${{ env.GITHUB_SHA_SHORT }}" .
+          args: go build -ldflags \"-X main.Version=${{ env.GITHUB_SHA_SHORT }}\" .
 
       - name: Build and push image
         uses: docker/build-push-action@v2
