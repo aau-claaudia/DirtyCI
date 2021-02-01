@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"sync/atomic"
+	//"sync/atomic"
 )
 
 // Version is set by ldflags
