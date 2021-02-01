@@ -8,6 +8,16 @@ import (
 	"sync/atomic"
 )
 
+// Version is set by ldflags
+var Version string
+
+// ensure Version has at least a non empty value
+func init() {
+	if Version == "" {
+		Version = "not available"
+	}
+}
+
 func main() {
 	// lovely state
 	var visitors uint64
@@ -19,6 +29,8 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		atomic.AddUint64(&visitors, 1)
+
+		w.Header().Add("X-Version", Version)
 		fmt.Fprintf(w, "Hello %s, this is %s, you are my number %d\n", r.RemoteAddr, hostname, visitors)
 	})
 

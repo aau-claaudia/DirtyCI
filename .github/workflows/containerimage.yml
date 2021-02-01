@@ -17,12 +17,16 @@ jobs:
 
       - name: fetch repository
         uses: actions/checkout@master
-
+      - name: Set GITHUB_SHA_SHORT
+        run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
+      
       - name: build app
         uses: cedrickring/golang-action@1.6.0
         env:
           PROJECT_PATH: "app/"
           CGO_ENABLED: "0" 
+        with:
+          args: go build -ldflags "-X main.Version=${{ env.GITHUB_SHA_SHORT }}" .
 
       - name: Build and push image
         uses: docker/build-push-action@v2
@@ -32,3 +36,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/aau-claaudia/dirtyci:latest
+            ghcr.io/aau-claaudia/dirtyci:${{ env.GITHUB_SHA_SHORT }}
