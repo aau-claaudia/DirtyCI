@@ -60,7 +60,6 @@ jobs:
           inventory: ansible/inventory
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh_common_args: UserKnownHostsFile=known_hosts
-        env:
       # quick and dirty image update, we should manage a complete service spec and deploy it
       - name: update service spec
         run: | 
