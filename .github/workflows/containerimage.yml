@@ -55,6 +55,8 @@ jobs:
     steps:
       - name: fetch repository
         uses: actions/checkout@master
+      - name: Set GITHUB_SHA_SHORT
+        run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
       - name: Play Ansible Playbook
         uses: arillso/action.playbook@master
         with:
