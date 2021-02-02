@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	//"sync/atomic"
+	"sync/atomic"
 )
 
 // Version is set by ldflags
@@ -28,7 +28,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		visitors += 1
+		atomic.AddUint64(&visitors, 1)
 
 		w.Header().Add("X-Version", Version)
 		w.Header().Add("X-More-Header", "header")
