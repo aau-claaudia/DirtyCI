@@ -51,11 +51,13 @@ jobs:
       name: Production
       url: http://130.226.98.55
     steps:
+      - name: fetch repository
+        uses: actions/checkout@master
       - name: Play Ansible Playbook
         uses: arillso/action.playbook@master
         with:
-          playbook: /github/workspace/ansible/playbook.yml
-          inventory: /github/workspace/ansible/inventory
+          playbook: ansible/playbook.yml
+          inventory: ansible/inventory
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'false'
