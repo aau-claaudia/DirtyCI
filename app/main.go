@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"sync/atomic"
 )
 
@@ -22,17 +21,12 @@ func main() {
 	// lovely state
 	var visitors uint64
 
-	hostname, err := os.Hostname()
-	if err != nil {
-		log.Fatalf("unable to determine hostname: %s", err)
-	}
-
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		v := atomic.AddUint64(&visitors, 1)
 
 		w.Header().Add("X-Version", Version)
-		w.Header().Add("X-More-Header", "header")
-		fmt.Fprintf(w, "Hello %s, this is %s, you are my number %d\n", r.RemoteAddr, hostname, v)
+
+		fmt.Fprintf(w, "Hello %s, this is version %s you are my number %d\n", r.RemoteAddr, Version, v)
 	})
 
 	log.Printf("listening on :80")

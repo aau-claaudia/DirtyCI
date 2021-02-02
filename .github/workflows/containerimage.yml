@@ -62,3 +62,7 @@ jobs:
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'false'
           ANSIBLE_DEPRECATION_WARNINGS: 'false'
+      # quick and dirty image update, we should manage a complete service spec and deploy it
+      - name: update service spec
+        run: ssh 130.226.98.55 -lubuntu docker service update dirtyci --image ghcr.io/aau-claaudia/dirtyci:${{ env.GITHUB_SHA_SHORT }}
+        
