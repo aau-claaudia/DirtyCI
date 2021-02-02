@@ -55,7 +55,7 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: all.yml
-          directory: ${{ env.GITHUB_WORKSPACE }}/ansible
+          directory: ${{ github.workspace }}/ansible
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           inventory: |
             [all]
