@@ -20,6 +20,14 @@ jobs:
       - name: Set GITHUB_SHA_SHORT
         run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
       
+      - name: test app
+        uses: cedrickring/golang-action@1.6.0
+        env:
+          PROJECT_PATH: "app/"
+          CGO_ENABLED: "0" 
+        with:
+          args: go test -race -timeout 5s .
+
       - name: build app
         uses: cedrickring/golang-action@1.6.0
         env:
