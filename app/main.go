@@ -28,11 +28,11 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		atomic.AddUint64(&visitors, 1)
+		v := atomic.AddUint64(&visitors, 1)
 
 		w.Header().Add("X-Version", Version)
 		w.Header().Add("X-More-Header", "header")
-		fmt.Fprintf(w, "Hello %s, this is %s, you are my number %d\n", r.RemoteAddr, hostname, visitors)
+		fmt.Fprintf(w, "Hello %s, this is %s, you are my number %d\n", r.RemoteAddr, hostname, v)
 	})
 
 	log.Printf("listening on :80")
