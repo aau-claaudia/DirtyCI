@@ -1,0 +1,7 @@
+---
+
+- name: common configuration for all hosts
+  hosts: all
+
+  roles:
+    - { name: docker, tags: docker }
