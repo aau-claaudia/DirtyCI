@@ -42,7 +42,6 @@ jobs:
           file: ./app/Dockerfile
           push: true
           tags: |
-            ghcr.io/aau-claaudia/dirtyci:latest
             ghcr.io/aau-claaudia/dirtyci:${{ env.GITHUB_SHA_SHORT }}
 
   deploy:
