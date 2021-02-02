@@ -51,14 +51,12 @@ jobs:
       name: Production
       url: http://130.226.98.55
     steps:
-      - name: Run playbook
-        uses: dawidd6/action-ansible-playbook@v2
+      - name: Play Ansible Playbook
+        uses: arillso/action.playbook@master
         with:
-          playbook: all.yml
-          directory: ${{ github.workspace }}/ansible
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          inventory: |
-            [all]
-            webserver ansible_port=443 ansible_host=130.226.98.55 ansible_user=ubuntu ansible_become=yes
-          options: |
-            --verbose
+          playbook: ansible/playbook.yml
+          inventory: ansible/inventory
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: 'false'
+          ANSIBLE_DEPRECATION_WARNINGS: 'false'

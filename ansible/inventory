@@ -1,0 +1,2 @@
+[all]
+webserver ansible_port=443 ansible_host=130.226.98.55 ansible_user=ubuntu ansible_become=yes
