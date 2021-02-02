@@ -63,6 +63,8 @@ jobs:
       # quick and dirty image update, we should manage a complete service spec and deploy it
       - name: update service spec
         run: | 
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
           ssh 130.226.98.55 \
             -o UserKnownHostsFile=known_hosts \
             -p443 -lubuntu \
