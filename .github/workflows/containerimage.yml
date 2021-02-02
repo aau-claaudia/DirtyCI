@@ -59,10 +59,13 @@ jobs:
           playbook: ansible/playbook.yml
           inventory: ansible/inventory
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_common_args: UserKnownHostsFile=known_hosts
         env:
-          ANSIBLE_HOST_KEY_CHECKING: 'false'
-          ANSIBLE_DEPRECATION_WARNINGS: 'false'
       # quick and dirty image update, we should manage a complete service spec and deploy it
       - name: update service spec
-        run: ssh 130.226.98.55 -lubuntu docker service update dirtyci --image ghcr.io/aau-claaudia/dirtyci:${{ env.GITHUB_SHA_SHORT }}
+        run: | 
+          ssh 130.226.98.55 \
+            -o UserKnownHostsFile=known_hosts \
+            -p443 -lubuntu \
+            docker service update dirtyci --image ghcr.io/aau-claaudia/dirtyci:${{ env.GITHUB_SHA_SHORT }}
         
